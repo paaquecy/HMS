@@ -24,7 +24,7 @@ export default function Dashboard() {
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard title="Total Patients" value="12,847" trend={8.2} icon={Users} sparkline={sparkline()} />
         <StatCard title="Active Doctors" value="87" trend={3.1} icon={Stethoscope} iconColor="bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400" sparkline={sparkline()} />
-        <StatCard title="Monthly Revenue" value="$4.2M" trend={12.5} icon={DollarSign} iconColor="bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400" sparkline={sparkline()} />
+        <StatCard title="Monthly Revenue" value="₵52M" trend={12.5} icon={DollarSign} iconColor="bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400" sparkline={sparkline()} />
         <StatCard title="Bed Occupancy" value="87%" trend={-2.3} icon={BedDouble} iconColor="bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400" sparkline={sparkline()} />
       </div>
 

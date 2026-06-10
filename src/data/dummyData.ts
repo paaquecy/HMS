@@ -61,11 +61,11 @@ export const staff = [
 ]
 
 export const transactions = [
-  { id: 'TX-5001', patientName: 'Sarah Johnson', serviceType: 'Consultation', department: 'Cardiology', paymentMethod: 'Insurance', insuranceProvider: 'BlueCross', amount: '$450', status: 'paid', date: '2025-06-09' },
-  { id: 'TX-5002', patientName: 'James Wilson', serviceType: 'ICU Stay', department: 'ICU', paymentMethod: 'Insurance', insuranceProvider: 'Aetna', amount: '$12,500', status: 'pending', date: '2025-06-08' },
-  { id: 'TX-5003', patientName: 'Robert Taylor', serviceType: 'Emergency', department: 'Emergency', paymentMethod: 'Cash', insuranceProvider: 'N/A', amount: '$1,200', status: 'paid', date: '2025-06-09' },
-  { id: 'TX-5004', patientName: 'Emily Brown', serviceType: 'Surgery', department: 'Surgery', paymentMethod: 'Insurance', insuranceProvider: 'UnitedHealth', amount: '$8,750', status: 'paid', date: '2025-06-07' },
-  { id: 'TX-5005', patientName: 'Kevin Martinez', serviceType: 'Lab Tests', department: 'Laboratory', paymentMethod: 'Card', insuranceProvider: 'Cigna', amount: '$320', status: 'paid', date: '2025-06-06' },
+  { id: 'TX-5001', patientName: 'Sarah Johnson', serviceType: 'Consultation', department: 'Cardiology', paymentMethod: 'Insurance', insuranceProvider: 'BlueCross', amount: '₵5,580', status: 'paid', date: '2025-06-09' },
+  { id: 'TX-5002', patientName: 'James Wilson', serviceType: 'ICU Stay', department: 'ICU', paymentMethod: 'Insurance', insuranceProvider: 'Aetna', amount: '₵155,000', status: 'pending', date: '2025-06-08' },
+  { id: 'TX-5003', patientName: 'Robert Taylor', serviceType: 'Emergency', department: 'Emergency', paymentMethod: 'Cash', insuranceProvider: 'N/A', amount: '₵14,880', status: 'paid', date: '2025-06-09' },
+  { id: 'TX-5004', patientName: 'Emily Brown', serviceType: 'Surgery', department: 'Surgery', paymentMethod: 'Insurance', insuranceProvider: 'UnitedHealth', amount: '₵108,300', status: 'paid', date: '2025-06-07' },
+  { id: 'TX-5005', patientName: 'Kevin Martinez', serviceType: 'Lab Tests', department: 'Laboratory', paymentMethod: 'Card', insuranceProvider: 'Cigna', amount: '₵3,960', status: 'paid', date: '2025-06-06' },
 ]
 
 export const beds = [
@@ -87,10 +87,10 @@ export const roles = [
 ]
 
 export const branches = [
-  { id: 'BR-01', name: 'MediCare Main Campus', location: 'New York, NY', manager: 'Dr. Richard Hayes', contact: '+1 555-1000', totalStaff: 450, totalPatients: 2840, bedCapacity: 500, occupancyRate: '87%', monthlyRevenue: '$4.2M', status: 'active' },
-  { id: 'BR-02', name: 'MediCare East Wing', location: 'Brooklyn, NY', manager: 'Dr. Susan Wright', contact: '+1 555-1001', totalStaff: 180, totalPatients: 1120, bedCapacity: 200, occupancyRate: '92%', monthlyRevenue: '$1.8M', status: 'active' },
-  { id: 'BR-03', name: 'MediCare North Branch', location: 'Queens, NY', manager: 'Dr. Mark Johnson', contact: '+1 555-1002', totalStaff: 220, totalPatients: 1450, bedCapacity: 250, occupancyRate: '78%', monthlyRevenue: '$2.1M', status: 'active' },
-  { id: 'BR-04', name: 'MediCare West Clinic', location: 'Staten Island, NY', manager: 'Dr. Laura Kim', contact: '+1 555-1003', totalStaff: 95, totalPatients: 680, bedCapacity: 100, occupancyRate: '65%', monthlyRevenue: '$890K', status: 'under_review' },
+  { id: 'BR-01', name: 'MediCare Main Campus', location: 'Accra, Greater Accra', manager: 'Dr. Richard Hayes', contact: '+233 555-1000', totalStaff: 450, totalPatients: 2840, bedCapacity: 500, occupancyRate: '87%', monthlyRevenue: '₵52M', status: 'active' },
+  { id: 'BR-02', name: 'MediCare East Wing', location: 'Kumasi, Ashanti', manager: 'Dr. Susan Wright', contact: '+233 555-1001', totalStaff: 180, totalPatients: 1120, bedCapacity: 200, occupancyRate: '92%', monthlyRevenue: '₵22.3M', status: 'active' },
+  { id: 'BR-03', name: 'MediCare North Branch', location: 'Tamale, Northern', manager: 'Dr. Mark Johnson', contact: '+233 555-1002', totalStaff: 220, totalPatients: 1450, bedCapacity: 250, occupancyRate: '78%', monthlyRevenue: '₵26M', status: 'active' },
+  { id: 'BR-04', name: 'MediCare West Clinic', location: 'Takoradi, Western', manager: 'Dr. Laura Kim', contact: '+233 555-1003', totalStaff: 95, totalPatients: 680, bedCapacity: 100, occupancyRate: '65%', monthlyRevenue: '₵11M', status: 'under_review' },
 ]
 
 export const auditLogs = [

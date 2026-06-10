@@ -1,4 +1,4 @@
-import { DollarSign, TrendingUp, Calendar, AlertCircle, Shield, PiggyBank, Receipt, Percent } from 'lucide-react'
+import { DollarSign, TrendingUp, Calendar, CircleAlert as AlertCircle, Shield, PiggyBank, Receipt, Percent } from 'lucide-react'
 import {
   PieChart, Pie, Cell, BarChart, Bar, LineChart, Line, AreaChart, Area,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
@@ -45,10 +45,10 @@ const expenseBreakdown = [
 ]
 
 const activityFeed = [
-  { action: 'Payment received', detail: '$450 from Sarah Johnson', time: '2 min ago', type: 'payment' },
+  { action: 'Payment received', detail: '₵5,580 from Sarah Johnson', time: '2 min ago', type: 'payment' },
   { action: 'Invoice generated', detail: 'TX-5006 for ICU stay', time: '15 min ago', type: 'invoice' },
   { action: 'Claim approved', detail: 'Aetna claim #CL-8821', time: '32 min ago', type: 'insurance' },
-  { action: 'Refund processed', detail: '$120 to Emily Brown', time: '1 hr ago', type: 'refund' },
+  { action: 'Refund processed', detail: '₵1,488 to Emily Brown', time: '1 hr ago', type: 'refund' },
 ]
 
 export default function RevenueAnalytics() {
@@ -57,13 +57,13 @@ export default function RevenueAnalytics() {
       <PageHeader title="Revenue Analytics" subtitle="Monitor hospital financial performance, income streams, expenses, insurance claims, and revenue growth" />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Total Revenue" value="$48.2M" trend={12.5} icon={DollarSign} sparkline={sparkline()} />
-        <StatCard title="Monthly Revenue" value="$4.2M" trend={8.3} icon={Calendar} iconColor="bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400" sparkline={sparkline()} />
-        <StatCard title="Daily Revenue" value="$142K" trend={5.1} icon={TrendingUp} sparkline={sparkline()} />
-        <StatCard title="Outstanding" value="$890K" trend={-3.2} icon={AlertCircle} iconColor="bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400" sparkline={sparkline()} />
-        <StatCard title="Insurance Claims" value="$2.1M" trend={6.8} icon={Shield} iconColor="bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400" sparkline={sparkline()} />
-        <StatCard title="Net Profit" value="$1.8M" trend={10.2} icon={PiggyBank} iconColor="bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400" sparkline={sparkline()} />
-        <StatCard title="Op. Expenses" value="$2.4M" trend={4.5} icon={Receipt} iconColor="bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400" sparkline={sparkline()} />
+        <StatCard title="Total Revenue" value="₵597M" trend={12.5} icon={DollarSign} sparkline={sparkline()} />
+        <StatCard title="Monthly Revenue" value="₵52M" trend={8.3} icon={Calendar} iconColor="bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400" sparkline={sparkline()} />
+        <StatCard title="Daily Revenue" value="₵1.76M" trend={5.1} icon={TrendingUp} sparkline={sparkline()} />
+        <StatCard title="Outstanding" value="₵11M" trend={-3.2} icon={AlertCircle} iconColor="bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400" sparkline={sparkline()} />
+        <StatCard title="Insurance Claims" value="₵26M" trend={6.8} icon={Shield} iconColor="bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400" sparkline={sparkline()} />
+        <StatCard title="Net Profit" value="₵22.3M" trend={10.2} icon={PiggyBank} iconColor="bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400" sparkline={sparkline()} />
+        <StatCard title="Op. Expenses" value="₵29.7M" trend={4.5} icon={Receipt} iconColor="bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400" sparkline={sparkline()} />
         <StatCard title="Growth Rate" value="12.5%" trend={2.1} icon={Percent} iconColor="bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400" sparkline={sparkline()} />
       </div>
 
@@ -80,7 +80,7 @@ export default function RevenueAnalytics() {
               </PieChart>
             </ResponsiveContainer>
           </ChartCard>
-          <ChartCard title="Monthly Revenue vs Expenses ($K)">
+          <ChartCard title="Monthly Revenue vs Expenses (₵K)">
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={monthlyRevenue}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-700" />
@@ -128,7 +128,7 @@ export default function RevenueAnalytics() {
             {['BlueCross', 'Aetna', 'UnitedHealth', 'Cigna'].map((p, i) => (
               <div key={p} className="mb-2 flex justify-between text-sm">
                 <span>{p}</span>
-                <span className="font-medium">${[520, 380, 290, 210][i]}K</span>
+                <span className="font-medium">₵{[6.4, 4.7, 3.6, 2.6][i]}M</span>
               </div>
             ))}
           </WidgetCard>
@@ -141,7 +141,7 @@ export default function RevenueAnalytics() {
 
       <section>
         <SectionTitle title="Department Financial Performance" />
-        <ChartCard title="Revenue vs Cost by Department ($K)">
+        <ChartCard title="Revenue vs Cost by Department (₵K)">
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={deptRevenue}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-700" />
@@ -210,7 +210,7 @@ export default function RevenueAnalytics() {
             <div>
               <p className="font-semibold text-slate-900 dark:text-white">AI Financial Recommendations</p>
               <ul className="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400">
-                <li>• Predicted July revenue: $4.6M (+9.5% growth)</li>
+                <li>• Predicted July revenue: ₵57M (+9.5% growth)</li>
                 <li>• Emergency department shows 15% revenue increase opportunity</li>
                 <li>• Consider expanding telehealth billing — 23% patient demand increase</li>
                 <li>• 3 overdue accounts flagged for collection follow-up</li>

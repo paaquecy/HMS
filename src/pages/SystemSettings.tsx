@@ -81,7 +81,7 @@ export default function SystemSettings() {
           <SettingInput label="Hospital Name" value="MediCare Hospital System" />
           <SettingInput label="Time Zone" value="America/New_York" />
           <SettingInput label="Language" value="English (US)" />
-          <SettingInput label="Currency" value="USD ($)" />
+          <SettingInput label="Currency" value="GHS (₵)" />
           <SettingInput label="Date Format" value="MM/DD/YYYY" />
           <SettingInput label="Default Branch" value="Main Campus" />
         </div>

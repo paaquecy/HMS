@@ -28,7 +28,7 @@ const branchColumns = [
 
 const branchRevenue = branches.map((b) => ({
   name: b.name.replace('MediCare ', ''),
-  revenue: parseFloat(b.monthlyRevenue.replace(/[$KM]/g, '')) * (b.monthlyRevenue.includes('M') ? 1000 : 1),
+  revenue: parseFloat(b.monthlyRevenue.replace(/[₵KM]/g, '')) * (b.monthlyRevenue.includes('M') ? 1000 : 1),
 }))
 
 const growthTrend = [
@@ -57,7 +57,7 @@ export default function HospitalBranches() {
         <StatCard title="Total Staff" value="945" trend={4.2} icon={Users} sparkline={sparkline()} />
         <StatCard title="Total Patients" value="6,090" trend={6.8} icon={Users} iconColor="bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400" sparkline={sparkline()} />
         <StatCard title="Avg Occupancy" value="80.5%" trend={2.1} icon={BedDouble} sparkline={sparkline()} />
-        <StatCard title="Total Revenue" value="$8.99M" trend={8.5} icon={DollarSign} iconColor="bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400" sparkline={sparkline()} />
+        <StatCard title="Total Revenue" value="₵111M" trend={8.5} icon={DollarSign} iconColor="bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400" sparkline={sparkline()} />
       </div>
 
       <section>
@@ -73,7 +73,7 @@ export default function HospitalBranches() {
       <section>
         <SectionTitle title="Branch Performance Analytics" />
         <div className="grid gap-4 lg:grid-cols-2">
-          <ChartCard title="Revenue by Branch ($K)">
+          <ChartCard title="Revenue by Branch (₵K)">
             <ResponsiveContainer width="100%" height={240}>
               <BarChart data={branchRevenue}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-700" />
@@ -84,7 +84,7 @@ export default function HospitalBranches() {
               </BarChart>
             </ResponsiveContainer>
           </ChartCard>
-          <ChartCard title="Revenue Growth Trend ($M)">
+          <ChartCard title="Revenue Growth Trend (₵M)">
             <ResponsiveContainer width="100%" height={240}>
               <LineChart data={growthTrend}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-700" />
