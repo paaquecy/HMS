@@ -1,10 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  ArrowLeft, ArrowRight, Check, Upload, X, Eye, EyeOff, Copy, Plus,
-  User, Briefcase, Stethoscope, Shield, DollarSign, Clock, FileText,
-  Heart, ClipboardCheck, Camera, AlertCircle, Loader2,
-} from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, Upload, X, Eye, EyeOff, Copy, Plus, User, Briefcase, Stethoscope, Shield, DollarSign, Clock, FileText, Heart, ClipboardCheck, Camera, CircleAlert as AlertCircle, Loader as Loader2 } from 'lucide-react'
 import PageHeader from '../components/layout/PageHeader'
 import { supabase } from '../lib/supabase'
 
