@@ -12,6 +12,7 @@ import SystemSettings from './pages/SystemSettings'
 import AuditLogs from './pages/AuditLogs'
 import ReportsAnalytics from './pages/ReportsAnalytics'
 import BackupSecurity from './pages/BackupSecurity'
+import AddNewEmployee from './pages/AddNewEmployee'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="patients" element={<TotalPatients />} />
         <Route path="doctors" element={<TotalDoctors />} />
         <Route path="staff" element={<StaffManagement />} />
+        <Route path="staff/add" element={<AddNewEmployee />} />
         <Route path="revenue" element={<RevenueAnalytics />} />
         <Route path="beds" element={<BedOccupancy />} />
         <Route path="roles" element={<UserRolesPermissions />} />

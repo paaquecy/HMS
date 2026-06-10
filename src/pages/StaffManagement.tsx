@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Plus, Users, UserCheck, CalendarOff, UserPlus, Building, Clock, TrendingUp, Star } from 'lucide-react'
 import {
   BarChart, Bar, PieChart, Pie, Cell, LineChart, Line,
@@ -46,12 +47,13 @@ const recruitmentPipeline = [
 ]
 
 export default function StaffManagement() {
+  const navigate = useNavigate()
   return (
     <div className="space-y-8">
       <PageHeader
         title="Staff Management"
         subtitle="Manage hospital employees, workforce operations, scheduling, attendance, and staff performance"
-        actions={<button className="btn-primary"><Plus className="h-4 w-4" /> Add New Employee</button>}
+        actions={<button onClick={() => navigate('/staff/add')} className="btn-primary"><Plus className="h-4 w-4" /> Add New Employee</button>}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
