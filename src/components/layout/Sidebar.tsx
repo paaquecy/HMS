@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Activity } from 'lucide-react'
 import { navItems } from '../../data/navigation'
+import { opdNavItems } from '../../data/opdNavigation'
+import { useAuth } from '../../contexts/AuthContext'
 
 interface SidebarProps {
   collapsed: boolean
@@ -8,6 +10,11 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
+  const { role } = useAuth()
+  const isOPD = role === 'opd_staff'
+  const items = isOPD ? opdNavItems : navItems
+  const subtitle = isOPD ? 'OPD Dashboard' : 'Super Admin'
+
   return (
     <aside
       className={`fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-slate-200/80 bg-white/90 backdrop-blur-md transition-all duration-300 dark:border-slate-800 dark:bg-slate-900/95 ${
@@ -21,13 +28,13 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         {!collapsed && (
           <div className="min-w-0">
             <p className="truncate text-sm font-bold text-slate-900 dark:text-white">MediCare HMS</p>
-            <p className="truncate text-xs text-slate-500">Super Admin</p>
+            <p className="truncate text-xs text-slate-500">{subtitle}</p>
           </div>
         )}
       </div>
 
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
-        {navItems.map(({ label, path, icon: Icon }) => (
+        {items.map(({ label, path, icon: Icon }) => (
           <NavLink
             key={path}
             to={path}

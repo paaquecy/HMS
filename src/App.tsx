@@ -15,6 +15,13 @@ import AuditLogs from './pages/AuditLogs'
 import ReportsAnalytics from './pages/ReportsAnalytics'
 import BackupSecurity from './pages/BackupSecurity'
 import AddNewEmployee from './pages/AddNewEmployee'
+import OPDRegistration from './pages/opd/OPDRegistration'
+import OPDAppointments from './pages/opd/OPDAppointments'
+import OPDWalkIn from './pages/opd/OPDWalkIn'
+import OPDQueue from './pages/opd/OPDQueue'
+import OPDCheckIn from './pages/opd/OPDCheckIn'
+import OPDSearch from './pages/opd/OPDSearch'
+import OPDInsurance from './pages/opd/OPDInsurance'
 
 export default function App() {
   return (
@@ -34,6 +41,13 @@ export default function App() {
         <Route path="audit-logs" element={<AuditLogs />} />
         <Route path="reports" element={<ReportsAnalytics />} />
         <Route path="backup-security" element={<BackupSecurity />} />
+        <Route path="opd/registration" element={<OPDRegistration />} />
+        <Route path="opd/appointments" element={<OPDAppointments />} />
+        <Route path="opd/walk-in" element={<OPDWalkIn />} />
+        <Route path="opd/queue" element={<OPDQueue />} />
+        <Route path="opd/checkin" element={<OPDCheckIn />} />
+        <Route path="opd/search" element={<OPDSearch />} />
+        <Route path="opd/insurance" element={<OPDInsurance />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

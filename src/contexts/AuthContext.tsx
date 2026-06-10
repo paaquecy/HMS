@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode, useCallback 
 import { supabase } from '../lib/supabase'
 import type { User, Session } from '@supabase/supabase-js'
 
-type Role = 'super_admin' | 'hospital_admin' | 'doctor' | 'nurse' | 'receptionist' | 'pharmacist' | 'limited'
+type Role = 'super_admin' | 'hospital_admin' | 'doctor' | 'nurse' | 'receptionist' | 'pharmacist' | 'limited' | 'opd_staff'
 
 interface AuthContextType {
   user: User | null

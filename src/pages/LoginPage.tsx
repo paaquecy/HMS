@@ -12,6 +12,7 @@ const ROLE_ROUTES: Record<string, string> = {
   receptionist: '/patients',
   pharmacist: '/patients',
   limited: '/patients',
+  opd_staff: '/opd/registration',
 }
 
 export default function LoginPage() {
