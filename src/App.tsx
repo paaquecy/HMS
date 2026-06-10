@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import DashboardLayout from './components/layout/DashboardLayout'
+import ProtectedRoute from './components/layout/ProtectedRoute'
+import LoginPage from './pages/LoginPage'
 import Dashboard from './pages/Dashboard'
 import TotalPatients from './pages/TotalPatients'
 import TotalDoctors from './pages/TotalDoctors'
@@ -17,7 +19,8 @@ import AddNewEmployee from './pages/AddNewEmployee'
 export default function App() {
   return (
     <Routes>
-      <Route element={<DashboardLayout />}>
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
         <Route index element={<Dashboard />} />
         <Route path="patients" element={<TotalPatients />} />
         <Route path="doctors" element={<TotalDoctors />} />

@@ -1,8 +1,12 @@
-import { Bell, Moon, Search, Sun, User } from 'lucide-react'
+import { Bell, Moon, Search, Sun, User, LogOut } from 'lucide-react'
 import { useTheme } from '../../contexts/ThemeContext'
+import { useAuth } from '../../contexts/AuthContext'
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme()
+  const { signOut, user } = useAuth()
+
+  const displayName = user?.email?.split('@')[0] ?? 'Admin'
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-slate-200/80 bg-white/80 px-6 backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/80">
@@ -34,9 +38,16 @@ export default function Navbar() {
             <User className="h-4 w-4" />
           </div>
           <div className="hidden sm:block">
-            <p className="text-sm font-semibold text-slate-900 dark:text-white">Dr. Admin</p>
+            <p className="text-sm font-semibold text-slate-900 dark:text-white capitalize">{displayName}</p>
             <p className="text-xs text-slate-500">Super Administrator</p>
           </div>
+          <button
+            onClick={signOut}
+            className="rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-red-500 dark:hover:bg-slate-800"
+            title="Sign out"
+          >
+            <LogOut className="h-4 w-4" />
+          </button>
         </div>
       </div>
     </header>
