@@ -22,7 +22,7 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const { signIn, role } = useAuth()
+  const { signIn, role, isDemoMode } = useAuth()
   const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
 
@@ -139,7 +139,9 @@ export default function LoginPage() {
                   <Shield className="h-7 w-7 text-primary-600 dark:text-primary-400" />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white">Sign In</h2>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Enter your credentials to access the dashboard</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  {isDemoMode ? 'Demo Mode: Use admin/admin123 or opd/opd123' : 'Enter your credentials to access the dashboard'}
+                </p>
               </div>
 
               {error && (

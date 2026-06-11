@@ -11,6 +11,7 @@ interface AuthContextType {
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
+  isDemoMode: boolean
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -20,13 +21,43 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   signIn: async () => ({ error: null }),
   signOut: async () => {},
+  isDemoMode: false,
 })
+
+const DEMO_USERS: Record<string, { password: string; role: Role }> = {
+  'admin@medicare.com': { password: 'admin123', role: 'super_admin' },
+  'admin': { password: 'admin123', role: 'super_admin' },
+  'opd@medicare.com': { password: 'opd123', role: 'opd_staff' },
+  'opd': { password: 'opd123', role: 'opd_staff' },
+  'doctor@medicare.com': { password: 'doctor123', role: 'doctor' },
+  'nurse@medicare.com': { password: 'nurse123', role: 'nurse' },
+}
+
+const isSupabaseConfigured = (): boolean => {
+  const url = import.meta.env.VITE_SUPABASE_URL
+  const key = import.meta.env.VITE_SUPABASE_ANON_KEY
+  return !!(url && key && url !== 'https://placeholder.supabase.co')
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [role, setRole] = useState<Role | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isDemoMode, setIsDemoMode] = useState(!isSupabaseConfigured())
+
+  // Check for persisted demo session
+  useEffect(() => {
+    const demoSession = localStorage.getItem('hms-demo-session')
+    if (demoSession && isDemoMode) {
+      try {
+        const parsed = JSON.parse(demoSession)
+        setRole(parsed.role)
+        setUser({ email: parsed.email } as User)
+      } catch {}
+    }
+    setLoading(false)
+  }, [isDemoMode])
 
   const fetchRole = useCallback(async (userId: string) => {
     const { data } = await supabase
@@ -39,6 +70,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
+    if (isDemoMode) return
+
     supabase.auth.getSession().then(({ data: { session: s } }) => {
       setSession(s)
       setUser(s?.user ?? null)
@@ -54,20 +87,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
 
     return () => subscription.unsubscribe()
-  }, [fetchRole])
+  }, [fetchRole, isDemoMode])
 
   useEffect(() => {
     if (user !== null && role !== null) setLoading(false)
-    if (user === null) setLoading(false)
-  }, [user, role])
+    if (user === null && !isDemoMode) setLoading(false)
+  }, [user, role, isDemoMode])
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const emailLookup = email.includes('@') ? email : `${email}@medicare.com`
+
+    if (isDemoMode) {
+      const demoUser = DEMO_USERS[emailLookup]
+      if (demoUser && demoUser.password === password) {
+        setRole(demoUser.role)
+        setUser({ email: emailLookup } as User)
+        localStorage.setItem('hms-demo-session', JSON.stringify({ email: emailLookup, role: demoUser.role }))
+        return { error: null }
+      }
+      return { error: 'Invalid credentials. Try admin/admin123 or opd/opd123' }
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({ email: emailLookup, password })
     if (error) return { error: error.message }
     return { error: null }
   }
 
   const signOut = async () => {
+    if (isDemoMode) {
+      localStorage.removeItem('hms-demo-session')
+      setUser(null)
+      setSession(null)
+      setRole(null)
+      return
+    }
     await supabase.auth.signOut()
     setUser(null)
     setSession(null)
@@ -75,7 +128,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, session, role, loading, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, session, role, loading, signIn, signOut, isDemoMode }}>
       {children}
     </AuthContext.Provider>
   )
