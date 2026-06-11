@@ -49,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Check for persisted demo session
   useEffect(() => {
     const demoSession = localStorage.getItem('hms-demo-session')
-    if (demoSession && isDemoMode) {
+    if (demoSession) {
       try {
         const parsed = JSON.parse(demoSession)
         setRole(parsed.role)
@@ -57,7 +57,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch {}
     }
     setLoading(false)
-  }, [isDemoMode])
+  }, [])
 
   const fetchRole = useCallback(async (userId: string) => {
     const { data } = await supabase
@@ -97,20 +97,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signIn = async (email: string, password: string) => {
     const emailLookup = email.includes('@') ? email : `${email}@medicare.com`
 
-    if (isDemoMode) {
-      const demoUser = DEMO_USERS[emailLookup]
-      if (demoUser && demoUser.password === password) {
-        setRole(demoUser.role)
-        setUser({ email: emailLookup } as User)
-        localStorage.setItem('hms-demo-session', JSON.stringify({ email: emailLookup, role: demoUser.role }))
-        return { error: null }
-      }
-      return { error: 'Invalid credentials. Try admin/admin' }
+    // Check demo credentials first
+    const demoUser = DEMO_USERS[emailLookup] || DEMO_USERS[email]
+    if (demoUser && demoUser.password === password) {
+      setRole(demoUser.role)
+      setUser({ email: emailLookup } as User)
+      localStorage.setItem('hms-demo-session', JSON.stringify({ email: emailLookup, role: demoUser.role }))
+      return { error: null }
     }
 
-    const { error } = await supabase.auth.signInWithPassword({ email: emailLookup, password })
-    if (error) return { error: error.message }
-    return { error: null }
+    // If not demo user, try Supabase auth
+    if (!isDemoMode) {
+      const { error } = await supabase.auth.signInWithPassword({ email: emailLookup, password })
+      if (error) return { error: error.message }
+      return { error: null }
+    }
+
+    return { error: 'Invalid credentials. Try admin/admin' }
   }
 
   const signOut = async () => {
