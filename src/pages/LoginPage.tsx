@@ -48,8 +48,11 @@ export default function LoginPage() {
     }
   }
 
+  // Handle successful login - navigate to stored path or default
   if (role) {
-    navigate(ROLE_ROUTES[role] ?? '/', { replace: true })
+    const redirectPath = sessionStorage.getItem('hms-redirect-path') || ROLE_ROUTES[role] || '/'
+    sessionStorage.removeItem('hms-redirect-path')
+    navigate(redirectPath, { replace: true })
   }
 
   const securityFeatures = [
@@ -140,7 +143,7 @@ export default function LoginPage() {
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white">Sign In</h2>
                 <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                  {isDemoMode ? 'Demo Mode: Use admin/admin123 or opd/opd123' : 'Enter your credentials to access the dashboard'}
+                  {isDemoMode ? 'Demo Mode: Use admin/admin to login' : 'Enter your credentials to access the dashboard'}
                 </p>
               </div>
 

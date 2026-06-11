@@ -25,12 +25,12 @@ const AuthContext = createContext<AuthContextType>({
 })
 
 const DEMO_USERS: Record<string, { password: string; role: Role }> = {
-  'admin@medicare.com': { password: 'admin123', role: 'super_admin' },
-  'admin': { password: 'admin123', role: 'super_admin' },
-  'opd@medicare.com': { password: 'opd123', role: 'opd_staff' },
-  'opd': { password: 'opd123', role: 'opd_staff' },
-  'doctor@medicare.com': { password: 'doctor123', role: 'doctor' },
-  'nurse@medicare.com': { password: 'nurse123', role: 'nurse' },
+  'admin@medicare.com': { password: 'admin', role: 'super_admin' },
+  'admin': { password: 'admin', role: 'super_admin' },
+  'opd@medicare.com': { password: 'opd', role: 'opd_staff' },
+  'opd': { password: 'opd', role: 'opd_staff' },
+  'doctor@medicare.com': { password: 'doctor', role: 'doctor' },
+  'nurse@medicare.com': { password: 'nurse', role: 'nurse' },
 }
 
 const isSupabaseConfigured = (): boolean => {
@@ -105,7 +105,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('hms-demo-session', JSON.stringify({ email: emailLookup, role: demoUser.role }))
         return { error: null }
       }
-      return { error: 'Invalid credentials. Try admin/admin123 or opd/opd123' }
+      return { error: 'Invalid credentials. Try admin/admin' }
     }
 
     const { error } = await supabase.auth.signInWithPassword({ email: emailLookup, password })
